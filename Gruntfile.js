@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -20,8 +21,17 @@ module.exports = function(grunt) {
 			tplmodules: 'angular.module("adaptive.tpls", [<%= tplModules %>]);',
 			all: 'angular.module("adaptive", ["adaptive.tpls", <%= srcModules %>]);'
 		},
+		connect: {
+			server: {
+				options: {
+					port: 3001,
+					keepalive: true,
+					base: '.'
+				}
+			}
+		},
 		watch: {
-			files: ['<%= jshint.files %>', 'template/**/*.html'],
+			files: ['<%= jshint.files %>', 'template/**/*.html', 'index.html'],
 			tasks: 'before-test test-run'
 		},
 		concat: {
@@ -261,10 +271,12 @@ module.exports = function(grunt) {
 		runTestacular('start', options);
 	});
 
-	grunt.registerTask('server', 'start testacular server', function() {
-		var options = ['--no-single-run', '--no-auto-watch'].concat(this.args);
-		runTestacular('start', options);
-	});
+	// grunt.registerTask('server', 'start testacular server', function() {
+	// 	var options = ['--no-single-run', '--no-auto-watch'].concat(this.args);
+	// 	runTestacular('start', options);
+	// });
+
+	grunt.registerTask("run", "server watch");
 
 	grunt.registerTask('test-run', 'run tests against continuous testacular server', function() {
 		var options = ['--single-run', '--no-auto-watch'].concat(this.args);
