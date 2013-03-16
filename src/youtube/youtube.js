@@ -8,6 +8,10 @@ angular.module('adaptive.youtube', [])
 		},
 		controller: function($scope, $element) {
 
+			$scope.play = function(){
+				// $scope.autoplay = '<iframe width="420" height="345" ng-src="http://www.youtube.com/embed/{{video}}?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+				$scope.fullvideo = 'http://www.youtube.com/embed/' + $scope.video + '?autoplay=1';
+			};
 		}
 	};
 }]);
