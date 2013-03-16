@@ -20,6 +20,11 @@ angular.module('adaptive.youtube', [])
 	return {
 		restrict: 'E',
 		templateUrl: '/template/youtube/youtube.html',
-		scope: {}
+		scope: {
+			video: "@"
+		},
+		controller: function($scope, $element) {
+			console.log($scope.video);
+		}
 	};
 }]);

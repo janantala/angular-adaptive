@@ -6,5 +6,5 @@ config(function($routeProvider) {
 });
 
 function AppCtrl($scope) {
-
+	$scope.youtubeId = 'kxopViU98Xo';
 }
