@@ -7,4 +7,5 @@ config(function($routeProvider) {
 
 function AppCtrl($scope) {
 	$scope.youtubeId = 'kxopViU98Xo';
+	$scope.vimeoId = '57625268';
 }
