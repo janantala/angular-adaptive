@@ -1,6 +1,6 @@
 <div class="adaptive-youtube">
 	<img ng-src="http://img.youtube.com/vi/{{video}}/0.jpg" alt="" ng-click="play()" ng-hide="fullvideo" ng-style="style"/>
-	<iframe width="{{youtube.width}}" height="{{youtube.height}}" ng-src="{{fullvideo}}" frameborder="0" allowfullscreen ng-show="fullvideo"></iframe>
+	<iframe id="iframeId" width="{{youtube.width}}" height="{{youtube.height}}" ng-src="{{fullvideo}}" frameborder="0" allowfullscreen ng-show="fullvideo"></iframe>
 </div>
 
 <!-- <p>

@@ -1,5 +1,5 @@
 angular.module('adaptive.youtube', [])
-.directive('youtube', [ function() {
+.directive('youtube', ['$timeout', function($timeout) {
 	return {
 		restrict: 'E',
 		templateUrl: '/template/youtube/youtube.html',
