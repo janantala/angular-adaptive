@@ -1,7 +1,7 @@
-<div class="adaptive-youtube" ng-style="style">
+<a ng-href="{{fullvideo}}" class="adaptive-youtube" ng-style="style">
 	<img ng-src="http://img.youtube.com/vi/{{video}}/0.jpg" alt="" ng-click="play()" ng-hide="ytapi" ng-style="style"/>
 	<!-- <iframe id="iframeId" width="{{youtube.width}}" height="{{youtube.height}}" ng-src="{{fullvideo}}" frameborder="0" allowfullscreen ng-show="fullvideo"></iframe> -->
 	
 	<div id="player" ng-show="ytapi" ng-style="style"></div>
-</div>
+</a>
 

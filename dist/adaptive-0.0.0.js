@@ -99,7 +99,7 @@ angular.module('adaptive.youtube', [])
 		controller: function($scope, $element) {
 
 			$scope.play = function(){
-				// $scope.fullvideo = 'http://www.youtube.com/embed/' + $scope.video + '?autoplay=1';
+				$scope.fullvideo = 'http://www.youtube.com/video/' + $scope.video + '?autoplay=1';
 				$scope.ytapi = true;
 
 				var player;
@@ -151,6 +151,12 @@ angular.module('adaptive.youtube', [])
 
 			});
 
+			var oldiOS = false;
+			$element.bind('click', function(event){
+				if (!oldiOS) {
+					event.preventDefault();
+				}
+			});
 
 		}
 	};
