@@ -1,10 +1,7 @@
-<div class="adaptive-youtube">
-	<img ng-src="http://img.youtube.com/vi/{{video}}/0.jpg" alt="" ng-click="play()" ng-hide="fullvideo" ng-style="style"/>
-	<iframe id="iframeId" width="{{youtube.width}}" height="{{youtube.height}}" ng-src="{{fullvideo}}" frameborder="0" allowfullscreen ng-show="fullvideo"></iframe>
+<div class="adaptive-youtube" ng-style="style">
+	<img ng-src="http://img.youtube.com/vi/{{video}}/0.jpg" alt="" ng-click="play()" ng-hide="ytapi" ng-style="style"/>
+	<!-- <iframe id="iframeId" width="{{youtube.width}}" height="{{youtube.height}}" ng-src="{{fullvideo}}" frameborder="0" allowfullscreen ng-show="fullvideo"></iframe> -->
+	
+	<div id="player" ng-show="ytapi" ng-style="style"></div>
 </div>
 
-<!-- <p>
-<img ng-src="http://img.youtube.com/vi/{{video}}/1.jpg" alt="" />
-<img ng-src="http://img.youtube.com/vi/{{video}}/2.jpg" alt="" />
-<img ng-src="http://img.youtube.com/vi/{{video}}/3.jpg" alt="" />
-</p> -->

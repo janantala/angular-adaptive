@@ -2,7 +2,7 @@ angular.module('adaptive.vimeo', [])
 .directive('vimeo', ['$http', function($http) {
 	return {
 		restrict: 'E',
-		templateUrl: '/template/vimeo/vimeo.html',
+		templateUrl: 'template/vimeo/vimeo.html',
 		scope: {
 			video: "@",
 			width: "@",
