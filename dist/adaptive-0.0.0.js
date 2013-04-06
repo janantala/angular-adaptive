@@ -111,8 +111,7 @@ angular.module('adaptive.youtube', [])
 
 				function onYouTubeIframeAPIReady() {
 					console.log('onYouTubeIframeAPIReady');
-
-					player = new YT.Player('player', {
+					player = new YT.Player($element.find('div')[0], {
 						height: $scope.height,
 						width: $scope.width,
 						videoId: $scope.video,
@@ -145,6 +144,7 @@ angular.module('adaptive.youtube', [])
 				$scope.youtube.height = $scope.height || 'auto';
 
 				$scope.style = {
+					'display': 'block',
 					'width': $scope.youtube.width,
 					'height': $scope.youtube.height
 				};
