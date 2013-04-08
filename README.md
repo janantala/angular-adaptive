@@ -13,3 +13,10 @@ I will know:
 * and many more...
 
 Under construction, check out develop branch.
+
+License
+======================
+
+The MIT License
+
+Copyright (c) 2013 the Jan Antala, https://github.com/janantala
