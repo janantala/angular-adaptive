@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-karma');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
 		jshint: {
 			files: ['Gruntfile.js','src/**/*.js'],
 			options: {
-				curly: true,
+				curly: false,
 				immed: true,
 				newcap: true,
 				noarg: true,
@@ -76,6 +77,12 @@ module.exports = function(grunt) {
 				globals: {
 					angular: true
 				}
+			}
+		},
+		karma: {
+			unit: {
+				configFile: 'test/karma.conf.js',
+				autoWatch: false
 			}
 		}
 	});
@@ -195,7 +202,7 @@ module.exports = function(grunt) {
 				};
 			}
 		}).filter(function(module){
-			 return module !== undefined;
+			return module !== undefined;
 		});
 
 		var templateFiles = grunt.file.expand("template/**/*.html.js");
@@ -213,7 +220,7 @@ module.exports = function(grunt) {
 				bsversion: grunt.config('bsversion')
 			}})
 		);
-		
+
 		grunt.file.expand('misc/demo-assets/*.*').forEach(function(path) {
 			grunt.file.copy(path, 'dist/assets/' + path.replace('misc/demo-assets/',''));
 		});
@@ -243,9 +250,10 @@ module.exports = function(grunt) {
 
 	// Testacular configuration
 	function runTestacular(command, options) {
-		var testacularCmd = process.platform === 'win32' ? 'testacular.cmd' : 'testacular';
+		var testacularCmd = process.platform === 'win32' ? 'karma.cmd' : 'karma';
 		var args = [command].concat(options);
 		var done = grunt.task.current.async();
+		console.log(testacularCmd + ' ' + args);
 		var child = grunt.util.spawn({
 				cmd: testacularCmd,
 				args: args
@@ -272,8 +280,8 @@ module.exports = function(grunt) {
 	});
 
 	// grunt.registerTask('server', 'start testacular server', function() {
-	// 	var options = ['--no-single-run', '--no-auto-watch'].concat(this.args);
-	// 	runTestacular('start', options);
+	//	var options = ['--no-single-run', '--no-auto-watch'].concat(this.args);
+	//	runTestacular('start', options);
 	// });
 
 	grunt.registerTask("run", "server watch");
@@ -287,6 +295,6 @@ module.exports = function(grunt) {
 		var options = ['--no-single-run', '--auto-watch'].concat(this.args);
 		runTestacular('start', options);
 	});
-	
+
 	return grunt;
 };
