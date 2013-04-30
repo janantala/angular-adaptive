@@ -55,10 +55,15 @@ angular.module('adaptive.googlemaps', [])
 				$scope.imgurl = "http://maps.googleapis.com/maps/api/staticmap?center=" + $scope.center + "&zoom=" + $scope.zoom + "&size=" + $scope.width + "x" + $scope.height + "&sensor=false";
 			});
 
+			var loaded = false;
 			$element.bind('click', function(event){
-				if (!Modernizr.ios) {
+				if (!Modernizr.ios && !loaded) {
 					event.preventDefault();
+					loaded = true;
 					loadMap($element.find('a'), $scope.center, $scope.zoom);
+				}
+				else if (!Modernizr.ios && loaded) {
+					event.preventDefault();
 				}
 			});
 		}
