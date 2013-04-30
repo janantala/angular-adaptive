@@ -1,18 +1,31 @@
 angular.module("adaptive", ["adaptive.tpls", "adaptive.googlemaps","adaptive.vimeo","adaptive.youtube"]);
 angular.module("adaptive.tpls", ["template/googlemaps/googlemaps.html","template/vimeo/vimeo.html","template/youtube/youtube.html"]);
-(function () {
+(function (Modernizr, google) {
 
 	"use strict";
 
-var initialize = function() {
-	console.log('iii');
+var loadMap = function($element, center, zoom) {
 	var mapOptions = {
-		center: new google.maps.LatLng(-34.397, 150.644),
-		zoom: 8,
+		center: new google.maps.LatLng(0, 0),
+		zoom: (Number(zoom) || 8),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
-	var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	var map = new google.maps.Map($element[0], mapOptions);
+
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'address': center}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			map.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: map,
+				position: results[0].geometry.location
+			});
+		} else {
+			console.error('Geocode was not successful for the following reason: ' + status);
+		}
+	});
+
 };
 
 
@@ -23,22 +36,38 @@ angular.module('adaptive.googlemaps', [])
 		restrict: 'E',
 		templateUrl: 'template/googlemaps/googlemaps.html',
 		scope: {
-			video: "@",
+			center: "@",
+			zoom: "@",
 			width: "@",
 			height:  "@"
 		},
-		controller: function($scope, $element) {
-			console.log('aaa');
-			$scope.$watch('height', function(){
-				// if (!$scope.height) return false;
-				// google.maps.event.addDomListener(window, 'load', initialize);
-				initialize();
+		link: function postLink($scope, $element, $attr) {
+			$scope.maps = {};
+			$scope.maps.width = $attr.width + 'px';
+			$scope.maps.height = $attr.height + 'px';
+			$scope.style = {
+				'display': 'block',
+				'cursor': 'pointer',
+				'width': $scope.maps.width,
+				'height': $scope.maps.height
+			};
+			$scope.$watch('center', function(){
+				if (!$scope.center) return false;
+				$scope.mapurl = "http://maps.apple.com/?q=" + $scope.center + "&z=" + $scope.zoom;
+				$scope.imgurl = "http://maps.googleapis.com/maps/api/staticmap?center=" + $scope.center + "&zoom=" + $scope.zoom + "&size=" + $scope.width + "x" + $scope.height + "&sensor=false";
+			});
+
+			$element.bind('click', function(event){
+				if (!Modernizr.ios) {
+					event.preventDefault();
+					loadMap($element.find('a'), $scope.center, $scope.zoom);
+				}
 			});
 		}
 	};
 }]);
 
-}());
+}(Modernizr, google));
 angular.module('adaptive.vimeo', [])
 .directive('vimeo', ['$http', function($http) {
 	return {
