@@ -1,10 +1,11 @@
-# Angular Adaptive - The adaptive components for AngularJS
+# Angular Adaptive [![Build Status](https://secure.travis-ci.org/janantala/angular-adaptive.png)](https://travis-ci.org/janantala/angular-adaptive)
+The adaptive components for AngularJS
 
-***
+## ATTENTION
 
-[![Build Status](https://secure.travis-ci.org/janantala/angular-adaptive.png)](https://travis-ci.org/janantala/angular-adaptive)
+**Repository is moving into https://github.com/angular-adaptive**
 
-***
+---
 
 I will know:
 * youtube
