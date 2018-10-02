@@ -1,3 +1,7 @@
+# This repository is deprecated!
+
+---
+
 # Angular Adaptive 
 The adaptive components for AngularJS
 
